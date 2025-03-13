@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krusty Encyclopedia</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="app" class="container">
+        <h1>Krusty Encyclopedia</h1>
+        <input type="text" v-model="query" placeholder="Cari sesuatu..." @keyup.enter="search">
+        <button @click="search">Cari</button>
+        <button v-if="showResults" @click="reset" class="back-button">Kembali</button>
+
+        <div id="results" v-if="showResults">
+            <div v-for="item in results" :key="item.title" class="result-item">
+                <div class="result-text">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.body }}</p>
+                    <a :href="item.link" target="_blank" class="read-more">Baca selengkapnya di Wikipedia</a>
+                </div>
+                <img v-if="item.image" :src="item.image" alt="Gambar hasil" class="result-image">
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

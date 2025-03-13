@@ -1,0 +1,92 @@
+/* Background penuh */
+body {
+    font-family: Arial, sans-serif;
+    background: url('https://wallpaperaccess.com/full/4127824.jpg   ') no-repeat center center fixed;
+    background-size: cover;
+    color: black;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Kontainer utama */
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    width: 60%;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Input pencarian */
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+/* Tombol pencarian */
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    background: blue;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: darkblue;
+}
+
+/* Hasil pencarian */
+.result-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+/* Kontainer teks */
+.result-text {
+    flex: 1;
+    padding-right: 20px;
+}
+
+/* Gambar hasil pencarian */
+.result-image {
+    width: 150px; /* Sesuaikan ukuran */
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Link Wikipedia */
+.read-more {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: blue;
+    text-decoration: none;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+/* Tombol kembali */
+.back-button {
+    background: red;
+    margin-top: 10px;
+}
+
+.back-button:hover {
+    background: darkred;
+}
