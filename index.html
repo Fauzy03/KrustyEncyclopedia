@@ -3,25 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Krusty Encyclopedia - Portal informasi dan berita terkini dunia dalam satu tempat." />
-  <meta name="author" content="Krusty Developer Team" />
   <title>Krusty Encyclopedia</title>
-
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Vue.js -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <body>
   <div id="app">
-    <!-- Header -->
     <header class="main-header">
       <h1>Krusty Encyclopedia 🌐</h1>
       <p>Temukan pengetahuan & berita terkini dunia di satu tempat</p>
     </header>
 
-    <!-- Wikipedia Search -->
     <section class="search-section">
       <h2>🔍 Cari di Krusty Encyclopedia</h2>
       <div class="search-controls">
@@ -33,31 +25,51 @@
         </select>
         <input type="text" v-model="query" placeholder="Cari sesuatu..." @keyup.enter="search" />
         <button @click="search">Cari</button>
-        <button v-if="showResults" @click="reset" class="back-button">Kembali</button>
+        <button v-if="showResults" @click="reset">Kembali</button>
       </div>
 
-      <div v-if="isLoadingSearch" class="loading">On Processing...</div>
+      <div v-if="isLoadingSearch" class="loading">Sedang mencari...</div>
 
       <div v-if="showResults && !isLoadingSearch" id="results">
         <div v-for="item in results" :key="item.title" class="result-item">
           <div class="result-text">
             <h3>{{ item.title }}</h3>
             <p>{{ item.body }}</p>
+            <p v-if="item.extraInfo"><strong>Info Terkait:</strong> {{ item.extraInfo }}</p>
             <a :href="item.link" target="_blank" class="read-more">Baca selengkapnya</a>
+            <div class="add-info-form">
+              <input v-model="item.newInfo" type="text" placeholder="Tambahkan info terkait..." />
+              <button @click="addExtraInfo(item)">Tambah</button>
+            </div>
+
+            <!-- Diskusi -->
+            <div class="discussion-section">
+              <h4>💬 Diskusi</h4>
+              <ul>
+                <li v-for="(comment, index) in item.comments" :key="index">
+                  {{ comment }}
+                </li>
+              </ul>
+              <input v-model="item.newComment" type="text" placeholder="Tulis komentar..." />
+              <button @click="addComment(item)">Kirim</button>
+            </div>
           </div>
           <img v-if="item.image" :src="item.image" alt="Gambar hasil" class="result-image" />
         </div>
+
+        <button v-if="results.length" @click="downloadResults" class="download-button">
+          📥 Unduh Hasil
+        </button>
       </div>
     </section>
 
-    <!-- Berita Terkini -->
     <section class="news-section">
       <h2>📰 Berita Terkini Dunia</h2>
       <div v-if="isLoadingNews" class="loading"><em>Memuat Breaking News...</em></div>
       <div v-else class="news-grid">
         <div v-for="item in news" :key="item.url" class="news-card">
-          <a :href="item.url" target="_blank" rel="noopener noreferrer">
-            <img v-if="item.urlToImage" :src="item.urlToImage" alt="thumbnail" class="news-image" />
+          <a :href="item.url" target="_blank">
+            <img v-if="item.urlToImage" :src="item.urlToImage" class="news-image" alt="News Thumbnail" />
             <h3>{{ item.title }}</h3>
             <p class="source">{{ item.source.name }}</p>
           </a>
@@ -66,7 +78,6 @@
     </section>
   </div>
 
-  <!-- Script utama -->
-  <script src="script.js" type="text/javascript"></script>
+  <script src="script.js"></script>
 </body>
 </html>
