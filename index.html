@@ -6,14 +6,11 @@
   <meta name="description" content="Krusty Encyclopedia - Portal informasi dan berita terkini dunia dalam satu tempat." />
   <meta name="author" content="Krusty Developer Team" />
   <title>Krusty Encyclopedia</title>
-
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Vue.js -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
-<body>
+<body :class="{ 'dark-mode': darkMode }">
   <div id="app">
     <!-- Auth Info -->
     <div class="auth-bar">
@@ -28,6 +25,22 @@
     <header class="main-header">
       <h1>Krusty Encyclopedia 🌐</h1>
       <p>Temukan pengetahuan & berita terkini dunia di satu tempat</p>
+
+      <section class="settings-section">
+        <div class="settings-controls">
+          <label>
+            <input type="checkbox" v-model="darkMode" /> Mode Gelap
+          </label>
+          <label>
+            <select v-model="language">
+              <option value="id">Bahasa Indonesia</option>
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+            </select>
+          </label>
+        </div>
+      </section>
     </header>
 
     <!-- Wikipedia Search -->
@@ -45,6 +58,16 @@
         <button v-if="showResults" @click="reset" class="back-button">Kembali</button>
       </div>
 
+      <div v-if="searchHistory.length" class="history-section">
+        <h3>🕐 Histori Pencarian</h3>
+        <ul class="history-list">
+          <li v-for="(term, index) in searchHistory" :key="index">
+            <button @click="searchFromHistory(term)">{{ term }}</button>
+          </li>
+        </ul>
+        <button @click="clearHistory" class="clear-history">Hapus Histori</button>
+      </div>
+
       <div v-if="isLoadingSearch" class="loading">Mencari di Wikipedia...</div>
 
       <div v-if="showResults && !isLoadingSearch" id="results">
@@ -52,9 +75,39 @@
           <div class="result-text">
             <h3>{{ item.title }}</h3>
             <p>{{ item.body }}</p>
+            <p v-if="item.extraInfo"><strong>Info Terkait:</strong> {{ item.extraInfo }}</p>
             <a :href="item.link" target="_blank" class="read-more">Baca selengkapnya di Wikipedia</a>
+
+            <button @click="toggleFavorite(item)">
+              {{ item.isFavorite ? 'Hapus dari Favorit' : 'Tambah ke Favorit' }}
+            </button>
+
+            <div class="discussion-section">
+              <h4>💬 Diskusi</h4>
+              <ul>
+                <li v-for="(comment, index) in item.comments" :key="index">{{ comment }}</li>
+              </ul>
+              <input v-model="item.newComment" type="text" placeholder="Tulis komentar..." />
+              <button @click="addComment(item)">Kirim</button>
+            </div>
           </div>
           <img v-if="item.image" :src="item.image" alt="Gambar hasil" class="result-image" />
+        </div>
+
+        <button v-if="results.length" @click="downloadResults" class="download-button">
+          Unduh Hasil
+        </button>
+      </div>
+    </section>
+
+    <!-- Favorit -->
+    <section class="favorites-section" v-if="favorites.length">
+      <h2>⭐ Favorit Saya</h2>
+      <div class="favorites-list">
+        <div v-for="item in favorites" :key="item.title" class="favorite-item">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.body }}</p>
+          <button @click="toggleFavorite(item)">Hapus dari Favorit</button>
         </div>
       </div>
     </section>
