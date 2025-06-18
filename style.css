@@ -114,7 +114,39 @@ body {
     color: #777;
   }
   
-  /* Modal background */
+  /* === AUTH BAR === */
+.auth-bar {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+}
+
+/* === AUTH BAR BUTTONS === */
+.auth-bar button {
+  padding: 0.5rem 1rem;
+  background-color: #2196f3;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.auth-bar button:hover {
+  background-color: #1976d2;
+}
+
+/* === USER GREETING TEXT === */
+.auth-bar span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffff;
+  margin-right: 0.5rem;
+}
+
+/* === MODAL OVERLAY (tidak digunakan, bisa dihapus atau digabung) === */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -128,43 +160,75 @@ body {
   z-index: 999;
 }
 
-/* Modal box */
+/* === MODAL WRAPPER === */
 .modal {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  width: 300px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Form input */
-.modal input {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-/* Button styling */
+/* === MODAL CONTENT BOX === */
+.modal-content {
+  position: relative;
+  width: 300px;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* === CLOSE BUTTON (X) === */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+/* === INPUT FIELDS === */
+.modal input {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* === BUTTON GENERAL === */
 .modal button {
   width: 100%;
   padding: 0.5rem;
-  background-color: #4caf50;
+  margin-top: 0.5rem;
+  background-color: #224c94;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .modal button:hover {
   background-color: #45a049;
 }
 
-/* Close button (optional) */
+/* === OPTIONAL CLOSE BUTTON STYLING === */
 .modal .close-btn {
   background-color: #f44336;
-  margin-top: 0.5rem;
 }
 
 .modal .close-btn:hover {
