@@ -343,7 +343,6 @@ body {
 }
 
 
-
 /* === BERITA TERKINI (CSS 2 STYLE) === */
 .news-grid {
   display: grid;
@@ -558,5 +557,113 @@ body.dark-mode .favorite-item button {
 
 body.dark-mode .result-item button:hover,
 body.dark-mode .favorite-item button:hover {
+  background-color: #1565c0;
+}
+
+/* Settings controls */
+/* body.dark-mode .settings-section {
+  padding: 1rem;
+  border-radius: 8px;
+} */
+/* body.dark-mode .settings-controls label,
+body.dark-mode .settings-controls select {
+  color: #eee;
+} */
+body.dark-mode .settings-controls input[type="checkbox"] {
+  accent-color: #90caf9;
+}
+
+/* History section */
+body.dark-mode .history-section {
+  background: #263238;
+  box-shadow: none;
+}
+body.dark-mode .history-section h3 {
+  color: #90caf9;
+}
+body.dark-mode .history-list button {
+  background-color: #37474f;
+  color: #ccc;
+}
+body.dark-mode .history-list button:hover {
+  background-color: #455a64;
+}
+
+/* Favorites section */
+body.dark-mode .favorites-section {
+  background: #232f34;
+  border-color: #b71c1c;
+}
+body.dark-mode .favorites-section h2 {
+  color: #ffcdd2;
+}
+body.dark-mode .favorite-item {
+  background: #2e2e2e;
+  box-shadow: none;
+}
+body.dark-mode .favorite-item h3,
+body.dark-mode .favorite-item p {
+  color: #ddd;
+}
+body.dark-mode .favorite-item button {
+  background-color: #d81b60;
+}
+body.dark-mode .favorite-item button:hover {
+  background-color: #ad1457;
+}
+
+/* Discussion section */
+body.dark-mode .discussion-section {
+  background: #3e2723;
+  box-shadow: none;
+}
+body.dark-mode .discussion-section h4 {
+  color: #ffb74d;
+}
+body.dark-mode .discussion-section li {
+  background: #424242;
+  color: #eee;
+  box-shadow: none;
+}
+body.dark-mode .discussion-section input {
+  background-color: #424242;
+}
+body.dark-mode .discussion-section button {
+  background-color: #ffa000;
+}
+body.dark-mode .discussion-section button:hover {
+  background-color: #ff8f00;
+}
+
+/* Download button */
+body.dark-mode .download-button {
+  background-color: #388e3c;
+}
+
+/* Modal */
+body.dark-mode .modal-content {
+  background: #2b2b2b;
+  color: #eee;
+}
+body.dark-mode .modal input {
+  background-color: #424242;
+  color: #eee;
+  border: 1px solid #555;
+}
+body.dark-mode .modal button {
+  background-color: #1976d2;
+}
+body.dark-mode .modal button:hover {
+  background-color: #1565c0;
+}
+
+/* Auth bar */
+body.dark-mode .auth-bar span {
+  color: #e0e0e0;
+}
+body.dark-mode .auth-bar button {
+  background-color: #0d47a1;
+}
+body.dark-mode .auth-bar button:hover {
   background-color: #1565c0;
 }
