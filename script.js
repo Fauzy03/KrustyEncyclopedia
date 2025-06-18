@@ -8,6 +8,15 @@ new Vue({
     isLoadingSearch: false,
     isLoadingNews: true,
     news: [],
+
+    // Login
+    loginForm: {
+      username: "",
+      password: "",
+    },
+    isLoggedIn: false,
+    username: "",
+    showLoginModal: false,
   },
   methods: {
     search() {
@@ -46,12 +55,9 @@ new Vue({
     fetchNews() {
       const apiKey = "b0c16bbdd4dd43879b18f366d1bf61d9"; // ← Ganti dengan API key Anda
 
-      // BERITA INDO
+      // Ganti antara berita Indo vs global:
       // const url = `https://newsapi.org/v2/everything?q=indonesia&language=id&sortBy=publishedAt&pageSize=6&apiKey=${apiKey}`;
-
-      // BERITA GLOBAL
       const url = `https://newsapi.org/v2/everything?q=breaking&language=en&sortBy=publishedAt&pageSize=6&apiKey=${apiKey}`;
-
 
       fetch(url)
         .then((res) => res.json())
@@ -69,8 +75,36 @@ new Vue({
           this.isLoadingNews = false;
         });
     },
+    login() {
+      const { username, password } = this.loginForm;
+
+      // Simple hardcoded login
+      if (username === "admin" && password === "admin123") {
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("username", username);
+        this.username = username;
+        this.isLoggedIn = true;
+        this.showLoginModal = false;
+
+        // Bersihkan form
+        this.loginForm.username = "";
+        this.loginForm.password = "";
+      } else {
+        alert("Username atau password salah.");
+      }
+    },
+    logout() {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("username");
+      this.isLoggedIn = false;
+      this.username = "";
+    },
   },
   mounted() {
     this.fetchNews();
+
+    // Cek status login saat pertama kali
+    this.isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    this.username = localStorage.getItem("username") || "";
   },
 });
